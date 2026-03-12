@@ -574,16 +574,7 @@
     .scroll-top.visible { display: flex; }
     .scroll-top svg { width: 20px; height: 20px; }
     
-    /* Print Styles */
-    @media print {
-      body { background: #0a0a0a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .header, .controls, .quick-nav, .scroll-top, .header-buttons { display: none !important; }
-      .hero { padding: 40px 0; page-break-after: avoid; }
-      .section { page-break-inside: avoid; break-inside: avoid; }
-      .section.expanded .section-content { display: block !important; }
-      .rules-content { padding: 20px 0; }
-    }
-    
+  
     /* Responsive */
     @media (max-width: 768px) {
       .header-text { display: none; }
