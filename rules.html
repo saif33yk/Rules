@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paradise Remastered - Server Rules</title>
+  <meta name="description" content="Official server rules for Paradise Remastered roleplay server">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --gold: #d4a94c;
+      --gold-light: #f4d794;
+      --gold-dark: #b8923e;
+      --bg-dark: #030303;
+      --bg-card: #0a0a0a;
+      --bg-hover: #111111;
+      --text-primary: #ffffff;
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --border: rgba(212, 169, 76, 0.15);
+      --border-hover: rgba(212, 169, 76, 0.3);
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    
+    /* Background Effects */
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bg-effects::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(212, 169, 76, 0.08), transparent 70%);
+      filter: blur(100px);
+    }
+    .bg-effects::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 169, 76, 0.04), transparent 70%);
+      filter: blur(120px);
+    }
+    
+    /* Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(3, 3, 3, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(212, 169, 76, 0.3);
+    }
+    .header-text h1 {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .header-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--bg-dark);
+      box-shadow: 0 4px 20px rgba(212, 169, 76, 0.3);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: rgba(212, 169, 76, 0.05);
+      color: var(--gold);
+      border: 1px solid rgba(212, 169, 76, 0.2);
+    }
+    .btn-outline:hover {
+      background: rgba(212, 169, 76, 0.1);
+      border-color: rgba(212, 169, 76, 0.3);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid transparent;
+    }
+    .btn-ghost:hover {
+      color: var(--gold);
+      background: rgba(212, 169, 76, 0.05);
+    }
+    .btn svg { width: 16px; height: 16px; }
+    
+    /* Hero */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 32px;
+      filter: drop-shadow(0 0 60px rgba(212, 169, 76, 0.4));
+    }
+    .hero h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .hero h2 span {
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(212, 169, 76, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .stat svg { color: var(--gold); width: 20px; height: 20px; }
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label { font-size: 14px; color: var(--text-secondary); }
+    
+    /* Search & Controls */
+    .controls {
+      position: sticky;
+      top: 77px;
+      z-index: 40;
+      background: rgba(3, 3, 3, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .controls .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 500px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 12px 40px 12px 44px;
+      font-size: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-box input::placeholder { color: var(--text-muted); }
+    .search-box input:focus {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 0 3px rgba(212, 169, 76, 0.1);
+    }
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+    }
+    .clear-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+    .clear-btn.visible { display: block; }
+    .clear-btn:hover { color: var(--text-primary); }
+    
+    .control-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    /* Filter Pills */
+    .filters {
+      display: none;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .filters.visible { display: flex; }
+    .filter-pill {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--gold);
+    }
+    .filter-pill.active {
+      background: rgba(212, 169, 76, 0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    
+    /* Results info */
+    .results-info {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 12px 0;
+    }
+    .results-info strong { color: var(--gold); }
+    
+    /* Quick Nav */
+    .quick-nav {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .quick-nav h3 {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .nav-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-hover);
+      color: var(--gold);
+      transform: translateX(4px);
+    }
+    .nav-item svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
+    .nav-count {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 2px 8px;
+      background: rgba(212, 169, 76, 0.1);
+      border-radius: 10px;
+      color: var(--gold);
+    }
+    
+    /* Rules Content */
+    .rules-content {
+      padding: 32px 0 80px;
+    }
+    
+    /* Section */
+    .section {
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: linear-gradient(135deg, rgba(212, 169, 76, 0.05), transparent);
+    }
+    .section-header:hover {
+      background: linear-gradient(135deg, rgba(212, 169, 76, 0.1), rgba(212, 169, 76, 0.02));
+    }
+    .section-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212, 169, 76, 0.1);
+      border-radius: 10px;
+      color: var(--gold);
+    }
+    .section-icon svg { width: 20px; height: 20px; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .section-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .section-toggle {
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+    .section-toggle svg { width: 20px; height: 20px; }
+    .section.expanded .section-toggle { transform: rotate(180deg); }
+    
+    .section-content {
+      display: none;
+      padding: 0 20px 20px;
+    }
+    .section.expanded .section-content { display: block; }
+    
+    /* Rules List */
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .rule {
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    .rule:hover {
+      background: rgba(212, 169, 76, 0.03);
+      border-color: var(--border);
+    }
+    .rule-id {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(212, 169, 76, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      height: fit-content;
+      white-space: nowrap;
+    }
+    .rule-content { flex: 1; }
+    .rule-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .rule-ban {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid;
+    }
+    .rule-ban.permanent { background: rgba(239, 68, 68, 0.1); color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); }
+    .rule-ban.wipe { background: rgba(168, 85, 247, 0.1); color: #d8b4fe; border-color: rgba(168, 85, 247, 0.3); }
+    .rule-ban.severe { background: rgba(249, 115, 22, 0.1); color: #fdba74; border-color: rgba(249, 115, 22, 0.3); }
+    .rule-ban.medium { background: rgba(234, 179, 8, 0.1); color: #fde047; border-color: rgba(234, 179, 8, 0.3); }
+    .rule-ban.light { background: rgba(212, 169, 76, 0.1); color: var(--gold); border-color: rgba(212, 169, 76, 0.3); }
+    .rule-ban.minor { background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
+    
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .footer h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .footer p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .punishment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .punishment-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .punishment-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .punishment-dot.perm { background: #ef4444; }
+    .punishment-dot.severe { background: #f97316; }
+    .punishment-dot.medium { background: #eab308; }
+    .punishment-dot.light { background: var(--gold); }
+    .punishment-dot.minor { background: #3b82f6; }
+    
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    /* Scroll to top */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border: none;
+      border-radius: 50%;
+      color: var(--bg-dark);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(212, 169, 76, 0.4);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .scroll-top:hover { transform: translateY(-2px); }
+    .scroll-top.visible { display: flex; }
+    .scroll-top svg { width: 20px; height: 20px; }
+    
+    /* Print Styles */
+    @media print {
+      body { background: #0a0a0a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .header, .controls, .quick-nav, .scroll-top, .header-buttons { display: none !important; }
+      .hero { padding: 40px 0; page-break-after: avoid; }
+      .section { page-break-inside: avoid; break-inside: avoid; }
+      .section.expanded .section-content { display: block !important; }
+      .rules-content { padding: 20px 0; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-text { display: none; }
+      .hero { padding: 48px 0; }
+      .hero-logo { width: 140px; height: 140px; }
+      .controls-row { flex-direction: column; align-items: stretch; }
+      .search-box { max-width: 100%; }
+      .control-buttons { justify-content: center; }
+      .nav-grid { grid-template-columns: 1fr; }
+      .rule { flex-direction: column; gap: 8px; }
+      .rule-id { width: fit-content; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-left">
+        <img src="logo.png" alt="Paradise Remastered" class="logo">
+        <div class="header-text">
+          <h1>Paradise Remastered</h1>
+          <p>Official Server Rules</p>
+        </div>
+      </div>
+      <div class="header-buttons">
+        <button class="btn btn-outline" onclick="window.print()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print
+        </button>
+        <button class="btn btn-primary" onclick="downloadTxt()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <img src="logo.png" alt="Paradise Remastered" class="hero-logo">
+      <h2>Server <span>Rules</span></h2>
+      <p>Welcome to Paradise Remastered. These rules ensure fair and enjoyable roleplay for everyone.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span class="stat-value" id="categoryCount">27</span>
+          <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span class="stat-value" id="ruleCount">0</span>
+          <span class="stat-label">Rules</span>
+        </div>
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span class="stat-label">Updated</span>
+          <span class="stat-value" id="updateDate" style="font-size: 14px;"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Controls -->
+  <section class="controls">
+    <div class="container">
+      <div class="controls-row">
+        <div class="search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" placeholder="Search rules by keyword, ID, or category...">
+          <button class="clear-btn" id="clearBtn" onclick="clearSearch()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="control-buttons">
+          <button class="btn btn-outline" id="filterToggle" onclick="toggleFilters()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            Filters
+          </button>
+          <div class="divider"></div>
+          <button class="btn btn-ghost" onclick="expandAll()">Expand All</button>
+          <button class="btn btn-ghost" onclick="collapseAll()">Collapse All</button>
+        </div>
+      </div>
+      
+      <div class="filters" id="filters">
+        <button class="filter-pill active" data-filter="all">All Rules</button>
+        <button class="filter-pill" data-filter="permanent">Permanent Ban</button>
+        <button class="filter-pill" data-filter="72+">72+ Hours</button>
+        <button class="filter-pill" data-filter="24-48">24-48 Hours</button>
+        <button class="filter-pill" data-filter="under24">Under 24h</button>
+        <button class="filter-pill" data-filter="none">No Ban Listed</button>
+      </div>
+      
+      <div class="results-info" id="resultsInfo"></div>
+    </div>
+  </section>
+  
+  <!-- Quick Navigation -->
+  <section class="quick-nav">
+    <div class="container">
+      <h3>Quick Navigation</h3>
+      <div class="nav-grid" id="navGrid"></div>
+    </div>
+  </section>
+  
+  <!-- Rules Content -->
+  <main class="rules-content">
+    <div class="container" id="rulesContainer"></div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <h3>Ban Duration Reference</h3>
+        <p>Understanding the punishment system helps maintain fair roleplay for everyone.</p>
+        <div class="punishment-grid">
+          <div class="punishment-item">
+            <div class="punishment-dot perm"></div>
+            <span>Permanent - Severe violations</span>
+          </div>
+          <div class="punishment-item">
+            <div class="punishment-dot severe"></div>
+            <span>72+ Hours - Major violations</span>
+          </div>
+          <div class="punishment-item">
+            <div class="punishment-dot medium"></div>
+            <span>48 Hours - Serious violations</span>
+          </div>
+          <div class="punishment-item">
+            <div class="punishment-dot light"></div>
+            <span>24-32 Hours - Standard violations</span>
+          </div>
+          <div class="punishment-item">
+            <div class="punishment-dot minor"></div>
+            <span>Kick/Warning - Minor offenses</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>Paradise Remastered &copy; 2024. Play fair. Respect others. Have fun.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script>
+    // Rules Data
+    const ruleSections = [
+      {
+        id: "major",
+        title: "Major Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 14-8.5 8.5a2.12 2.12 0 1 1-3-3L11 11"></path><path d="m16 16 6-6"></path><path d="m8 8 6-6"></path><path d="m9 7 8 8"></path><path d="m21 11-11 11"></path></svg>',
+        rules: [
+          { id: "1.1", text: "Players are requested to respect Paradise Team and the Community." },
+          { id: "1.2", text: "RDM (Random Death Match) will lead to ban depending on severity.", ban: "72 hours" },
+          { id: "1.3", text: "VDM (Vehicle Death Match) will lead to a ban depending on severity.", ban: "24 hours" },
+          { id: "1.4", text: "NLR (New Life Rule) must be followed. You can't get involved in a situation in which you have died and respawned.", ban: "24 hours" },
+          { id: "1.5", text: "Revenge RP is strictly prohibited and will lead to a ban.", ban: "24 hours" },
+          { id: "1.6", text: "Anyone found using Duplication, Exploiting Glitches/Bugs will lead to a Permanent Ban.", ban: "Permanent" },
+          { id: "1.7", text: "Using Third Party Softwares/Hacks will lead to a Permanent Ban (With no unban appeal).", ban: "Permanent" },
+          { id: "1.8", text: "Being toxic to someone off character may lead to temp ban.", ban: "Temp Ban" },
+          { id: "1.9", text: "Abusing in (OOC/Twitter/ME) will lead to a permanent ban.", ban: "Permanent" },
+          { id: "1.10", text: "Meta gaming is strictly prohibited (using information out-of-character in roleplay, stream sniping, identifying people by looking up their game IDs etc.).", ban: "32 hours" },
+          { id: "1.11", text: "Power gaming is strictly Prohibited - anything that gives unfair advantage in roleplaying.", ban: "72 hours" },
+          { id: "1.12", text: "Do not spam in chat (in-game and discord), it may lead to a kick.", ban: "Kick" },
+          { id: "1.13", text: "Everyone should cooperate and respect Content Creators. Stream sniping may cause temp ban.", ban: "Temp Ban" },
+          { id: "1.14", text: "Combat Logging - Intentionally disconnecting during a Situation will lead to ban.", ban: "48 hours" },
+          { id: "1.15", text: "You Cannot Shoot or Rob an EMS in any situation, unless they are seen in RDM zones." },
+          { id: "1.16", text: "Disrespecting or Abusing a Staff member will lead to a Permanent Ban.", ban: "Permanent" },
+          { id: "1.17", text: "Scamming is not allowed! It can lead to permanent ban.", ban: "12 hours" },
+          { id: "1.18", text: "While reporting a player, you must have video proof (minimum 5 minutes) of the situation." },
+          { id: "1.19", text: "You can't force someone to get money out of their bank account while robbing them." },
+          { id: "1.20", text: "Code-Red has to be initiated verbally." },
+          { id: "1.21", text: "All Gang members must have their Gang Tags while in game.", ban: "12 hours" },
+          { id: "1.22", text: "Using special characters in your name will lead to a kick from the server.", ban: "16 hours" },
+          { id: "1.23", text: "Associating with a hacker (taking money, items, guns or hiding their identity) will lead to a permanent ban.", ban: "Permanent" },
+          { id: "1.24", text: "Fear RP should be followed.", ban: "24 hours" },
+          { id: "1.25", text: "LSPD IS NOT ALLOWED TO INITIATE CODE RED. ONLY GANGS CAN INITIATE CODE REDS." },
+          { id: "1.26", text: "Any kind of disrespect to content creators or female players will lead to a permanent ban.", ban: "Permanent" },
+          { id: "1.27", text: "Your ingame name & discord name should remain same.", ban: "48 hours" },
+          { id: "1.28", text: "Helmets are not allowed in server.", ban: "24 hours" },
+          { id: "1.29", text: "Transaction of 1 Million without POV is not allowed. Your account will be wiped if caught.", ban: "Account Wipe" },
+          { id: "1.30", text: "It is forbidden to use OBS without overlays. All overlays must be recorded." },
+          { id: "1.31", text: "YOU CANNOT PLAY FROM YOUR OTHER STEAM ACCOUNTS.", ban: "Permanent" },
+        ]
+      },
+      {
+        id: "failrp",
+        title: "Fail RP Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>',
+        rules: [
+          { id: "2.1", text: "Fail RP - Any action that breaks roleplay immersion.", ban: "48 hours" },
+          { id: "2.2", text: "Carrying/Un-Carrying while dead will be considered Fail RP.", ban: "48 hours" },
+          { id: "2.3", text: "Any shots fired from moving vehicle will be considered fail RP unless code red has been initiated verbally." },
+          { id: "2.4", text: "You cannot wear any type of Ped during code red." },
+          { id: "2.5", text: "If you die during a situation you have to wait at least 5 minutes for respawn before leaving.", ban: "24 hours" },
+        ]
+      },
+      {
+        id: "codered",
+        title: "Code Red Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
+        rules: [
+          { id: "3.1", text: "Code-Red has to be initiated verbally." },
+          { id: "3.2", text: "Code red cannot be initiated whilst the vehicles are moving." },
+          { id: "3.3", text: "If anyone has PL above 10% they can't respond to code red situations.", ban: "24 hours" },
+          { id: "3.4", text: "Your PL, fps, and ping must be visible on your POV during code red situations.", ban: "6 hours" },
+          { id: "3.5", text: "After a code red situation is over, you CANNOT disconnect from server. You must get revived & leave OR respawn." },
+          { id: "3.6", text: "During code red if anyone is shooting out of the red circle, they will be banned.", ban: "72 hours" },
+          { id: "3.7", text: "Initiating through helicopters are strictly not allowed." },
+          { id: "3.8", text: "You CAN NOT initiate on Police by sending a police dispatch." },
+        ]
+      },
+      {
+        id: "combat",
+        title: "Combat Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"></path><path d="M13 19l6-6"></path><path d="M16 16l4 4"></path><path d="M19 21l2-2"></path></svg>',
+        rules: [
+          { id: "4.1", text: "Combat Logging - Intentionally disconnecting during a Situation.", ban: "48 hours" },
+          { id: "4.2", text: "Combat Storing - Storing valuables during chase/fight/active situation.", ban: "48 hours" },
+          { id: "4.3", text: "Combat Reviving - Healing yourself or reviving fellow player in code red.", ban: "36-72 hours" },
+          { id: "4.4", text: "If someone gets banned for Combat Logging, their inventory will be wiped too.", ban: "Inventory Wipe" },
+          { id: "4.5", text: "Ghost peak/Silent peak is not allowed.", ban: "32 hours" },
+        ]
+      },
+      {
+        id: "pitting",
+        title: "Vehicle Pitting Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>',
+        rules: [
+          { id: "5.1", text: "Pitting is allowed to destroy the other person's vehicle but code red must be verbally initiated." },
+          { id: "5.2", text: "Code red cannot be initiated whilst the vehicles are moving." },
+          { id: "5.3", text: "Any shots fired from moving vehicle will be considered fail RP unless code red has been initiated." },
+          { id: "5.4", text: "Any type of verbal communication is not valid in any type of car chase (Rebels vs Rebels & PD vs Rebels)." },
+          { id: "5.5", text: "Anyone seen using or violating Military Vehicles will be banned (Except Military).", ban: "48 hours" },
+        ]
+      },
+      {
+        id: "kidnapping",
+        title: "Kidnapping Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>',
+        rules: [
+          { id: "6.1", text: "You can only kidnap a COP/Civilian only if you have a legit reason - Minimum 2 members required." },
+          { id: "6.2", text: "FOR KIDNAPPING A CIVILIAN YOU HAVE TO GIVE MINIMUM 10 SECONDS FOR HANDSUP." },
+          { id: "6.3", text: "You cannot kidnap taxi driver.", ban: "48 hours" },
+          { id: "6.4", text: "You cannot kidnap Weazel News Department employees." },
+          { id: "6.5", text: "Only gangs that have a rivalry can start a kidnapping situation against each other.", ban: "4 days" },
+          { id: "6.6", text: "YOU ARE NOT ALLOWED TO PUNCH/ROB/KIDNAP CRIMINALS SENT FOR JAIL." },
+          { id: "6.7", text: "YOU CANNOT USE /TAKEHOSTAGE COMMAND UNTIL THE PERSON IS NOT HANDSUP.", ban: "24 hours" },
+        ]
+      },
+      {
+        id: "robbery-general",
+        title: "Robbery General Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>',
+        rules: [
+          { id: "7.1", text: "Robbers are advised to use Masks during any type of robbery in order not to get identified." },
+          { id: "7.2", text: "Tasing is highly prohibited during Hostage Situation, unless the robber's gun is not pointed at the Hostage." },
+          { id: "7.3", text: "Hostage is top priority in any situation." },
+          { id: "7.4", text: "Robbers are not allowed to Execute Hostage for no reason." },
+          { id: "7.5", text: "If the Robbers get caught, they have to do FEAR RP and show fear towards the Cops." },
+          { id: "7.6", text: "You must have a hostage in a Robbery in order to negotiate with the cops or buy time." },
+          { id: "7.7", text: "You can't run during an ongoing negotiation. Negotiations must end in order to run away." },
+          { id: "7.8", text: "In a hostage situation robbers are not allowed to ask for more than 2 (possible and valid) demands." },
+          { id: "7.9", text: "Robbing a COP/EMS is strictly prohibited." },
+          { id: "7.10", text: "You can not start any robbery knowingly that server is about to restart." },
+        ]
+      },
+      {
+        id: "jewelry",
+        title: "Jewelry Robbery",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>',
+        rules: [
+          { id: "8.1", text: "Amount of Robbers and Cops allowed at Jewelry Robberies is 4." },
+          { id: "8.2", text: "A gang can only trigger Jewelry robbery once after every hour.", ban: "48 hours" },
+          { id: "8.3", text: "Five-0 and LSPD will now respond together on robberies (4 LSPD + 4 Five-0 officers)." },
+        ]
+      },
+      {
+        id: "bank",
+        title: "Bank Robbery Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>',
+        rules: [
+          { id: "9.1", text: "Small Banks: Amount of Robbers allowed is 6, while 7 cops are allowed to respond." },
+          { id: "9.2", text: "Code red must be initiated verbally and at least 30 seconds heads up have to be given to the Cops." },
+          { id: "9.3", text: "Main Bank: A Maximum of 10 Cops Can Respond To A Situation." },
+        ]
+      },
+      {
+        id: "shop",
+        title: "Shop Robbery",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>',
+        rules: [
+          { id: "10.1", text: "Amount of Robbers and Cops allowed at Shop Robbery is 2." },
+          { id: "10.2", text: "Only Pistol And Shot Gun Is Allowed At Shop Robbery.", ban: "32 hours" },
+        ]
+      },
+      {
+        id: "humane",
+        title: "Humane Labs & Airplane Robbery",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>',
+        rules: [
+          { id: "11.1", text: "There is no limit for participating for Robbers or LSPD. Multiple Gangs are allowed to do the robbery together." },
+          { id: "11.2", text: "You can't take a hostage to Humane Labs or Airplane Robbery." },
+          { id: "11.3", text: "Every available weapon (unless blacklisted) is allowed to be used by robbers." },
+          { id: "11.4", text: "AIRPLANE ROBBERY - You are not allowed to camp the teleporter. Stand behind the yellow line in the hangar." },
+          { id: "11.5", text: "You CAN NOT INITIATE CODE RED DIRECTLY DURING AIRCRAFT HEIST. You have to tweet before initiating." },
+        ]
+      },
+      {
+        id: "steal",
+        title: "Steal Command Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>',
+        rules: [
+          { id: "12.1", text: "To use steal command, you should have Gun Pointed On the Player." },
+          { id: "12.2", text: "You Cannot Steal stuff from Police, EMS, Weazel News & Govt Members." },
+          { id: "12.3", text: "You Cannot Steal from People in SafeZone." },
+          { id: "12.4", text: "You must have higher manpower in order to steal from other party." },
+          { id: "12.5", text: "You can only steal from those gang members with whom you have rivalry." },
+          { id: "12.6", text: "You need minimum 2 members to steal/rob a single person." },
+          { id: "12.7", text: "You have to press X for handsup. Doing emote for handsup is power gaming.", ban: "24 hours" },
+        ]
+      },
+      {
+        id: "radio",
+        title: "Radio & Tracker Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path><circle cx="12" cy="12" r="2"></circle><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"></path><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"></path></svg>',
+        rules: [
+          { id: "13.1", text: "AS SOON AS YOU TAKE SOMEONE'S RADIO YOU HAVE TO GO SIT IN THEIR PERSON'S WAITING CHANNEL OR DEAFEN YOURSELF." },
+        ]
+      },
+      {
+        id: "safezone",
+        title: "Safe Zone Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+        rules: [
+          { id: "14.1", text: "VDM in a safe zone may lead to ban (depending on severity)." },
+          { id: "14.2", text: "You are not allowed to carry weapons in safe zone (Hospital/Mechanic/Dealership/Casino)." },
+          { id: "14.3", text: "Running from a situation and hiding in the safe zone may lead to ban.", ban: "16 hours" },
+          { id: "14.4", text: "PD is a Safe Zone for LSPD unless your gang member is being held at the PD." },
+          { id: "14.5", text: "You can't kidnap/kill/rob anyone within a 100 meters radius of a safe zone." },
+          { id: "14.6", text: "All Garages, Petrol Stations, Shops, Car Dealership, Mechanic and Banks are UNSCRIPTED SAFEZONE." },
+          { id: "14.7", text: "Government House Is Safe Zone. Same Rules Apply." },
+          { id: "14.8", text: "Spraying at LSPD, Five-O Station & Hospital is strictly prohibited.", ban: "32 hours" },
+          { id: "14.9", text: "Spraying at Paradise Staff office is strictly prohibited.", ban: "32 hours" },
+        ]
+      },
+      {
+        id: "cuffing",
+        title: "Cuffing Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m4.9 4.9 14.2 14.2"></path></svg>',
+        rules: [
+          { id: "15.1", text: "IF YOU TRY TO PUNCH A POLICE OFFICER WHEN HE'S CUFFING (DURING THE ANIMATION), YOU WILL BE BANNED." },
+          { id: "15.2", text: "PD has the right to ask for compensation + search the suspect if someone combat logs while PD is about to search them." },
+        ]
+      },
+      {
+        id: "rdmzone",
+        title: "RDM Zone Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>',
+        rules: [
+          { id: "16.1", text: "UNEMPLOYED AND EMS ARE NOT ALLOWED IN RDM ZONES (COCAINE_LABS, MONEY_WASH, WEED_LABS)." },
+          { id: "16.2", text: "IT IS A RDM ZONE, ANYBODY SEEN IN THIS AREA ARE TO BE SHOT DEAD BY THE COPS WITHOUT ANY INITIATION." },
+          { id: "16.3", text: "GANGS CAN MAKE COCAINE TOGETHER, BUT COPS OR SHERIFF CANNOT MAKE COCAINE. They will be removed from factions." },
+          { id: "16.4", text: "If someone sees a person leaving RDM zone, they can follow and kill without initiate (POV required)." },
+          { id: "16.5", text: "YOU CANNOT KILL A PERSON OUTSIDE OF RDM ZONE RADIUS." },
+          { id: "16.6", text: "NLR must be applied in every RDM zones." },
+          { id: "16.7", text: "You cannot carry your teammate in RDM zones." },
+        ]
+      },
+      {
+        id: "cayo",
+        title: "Cayo Perico Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17v1c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1v-1"></path><path d="M2 12v-1c0-.5.5-1 1-1h18c.5 0 1 .5 1 1v1"></path><path d="m10 10-2-2"></path><path d="m14 10 2-2"></path><path d="M10 14H4"></path><path d="M14 14h6"></path><path d="m10 17-1 3"></path><path d="m14 17 1 3"></path><rect x="2" y="4" width="20" height="6" rx="1"></rect></svg>',
+        rules: [
+          { id: "17.1", text: "Cayo Perico is a Red-Zone Area. You are allowed to shoot without any initiation." },
+          { id: "17.2", text: "LSPD can Search you right after killing you in Cayo Perico Red zone." },
+          { id: "17.3", text: "EMS is not allowed to respond at Cayo Perico." },
+          { id: "17.4", text: "NLR still applies at Cayo Perico." },
+          { id: "17.5", text: "Carrying someone within the RDM zone [Cayo Perico] is prohibited." },
+          { id: "17.6", text: "Collaborating with other gangs or forming alliances for Code Red at Cayo Perico is not allowed." },
+        ]
+      },
+      {
+        id: "territory",
+        title: "Territory Zone Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>',
+        rules: [
+          { id: "18.1", text: "Stay within the zone by keeping an eye on the left-side overlay." },
+          { id: "18.2", text: "The New Life Rule (NLR) applies across all zones." },
+          { id: "18.3", text: "EMS cannot enter during zone fights." },
+          { id: "18.4", text: "LSPD must declare their involvement with a 10-11 dispatch before joining a zone fight." },
+          { id: "18.5", text: "Bring backup from your own gang, no support from other gangs or alliances." },
+          { id: "18.6", text: "LSPD can only join fights within a 10-11 radius on their GPS." },
+          { id: "18.7", text: "Before starting a code red in the zone, each gang needs to post an anonymous tweet." },
+          { id: "18.8", text: "Combat reviving during active zone fights is strictly prohibited." },
+          { id: "18.9", text: "Once the zone war timer ends, code red activities must cease." },
+          { id: "18.10", text: "All parties must type 'OVER FROM [gang/faction name]' in OOC chat after timer ends." },
+          { id: "18.11", text: "After code red, PD can search gang members but rebels with more manpower can point guns and ask them to leave." },
+          { id: "18.12", text: "Alliance is allowed in zones after the code red ends (when asking PD to leave)." },
+          { id: "18.13", text: "During zone fights in small areas, nearest 2 plots will be considered within the code red radius." },
+          { id: "18.14", text: "Zone wars near the LSPD station and safe zones are strictly prohibited for gangs." },
+          { id: "18.15", text: "Gangs are not permitted to use helicopters at high altitudes for territory zones.", ban: "72 hours" },
+          { id: "18.16", text: "No one is allowed to take zones on MrJayPlays stream. Turf menu will be revoked for a week." },
+          { id: "18.17", text: "The gang who starts a zone war must post an Anonymous tweet before starting.", ban: "48 hours" },
+        ]
+      },
+      {
+        id: "powergaming",
+        title: "Power Gaming Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
+        rules: [
+          { id: "19.1", text: "Power gaming ban duration: 72 hours.", ban: "72 hours" },
+          { id: "19.2", text: "Powergaming is defined as anything that gives unfair advantage or makes it difficult for other party to roleplay." },
+          { id: "19.3", text: "You can only use /me to disable weapon and take communications. Other /me's like 'ties legs' are power gaming." },
+          { id: "19.4", text: "IT IS NOT ALLOWED TO ASK EMS TO NOT REVIVE. Maximum you can ask EMS to take to hospital and revive." },
+          { id: "19.5", text: "Using emote for handsup instead of pressing X is power gaming." },
+          { id: "19.6", text: "Using Ped lights feature from menu is prohibited.", ban: "24 hours" },
+          { id: "19.7", text: "Any type of Graphic pack that removes water, bushes or props are not allowed.", ban: "Permanent" },
+        ]
+      },
+      {
+        id: "initiation",
+        title: "Initiation Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
+        rules: [
+          { id: "20.1", text: "Failed Initiation ban duration: 24 hours.", ban: "24 hours" },
+          { id: "20.2", text: "If you intend to show threat to someone, you must verbally impose the same." },
+          { id: "20.3", text: "Initiations should be clearly communicated through voice chat ONLY (/me commands not valid)." },
+          { id: "20.4", text: "Initiating through helicopters are strictly not allowed." },
+          { id: "20.5", text: "You CAN NOT initiate on Police by sending a police dispatch." },
+          { id: "20.6", text: "If a player gets revived after a gun fight, he should leave or continue RP. Cannot join the fight again." },
+          { id: "20.7", text: "Any player not part of an established gang or faction is liable to initiate for himself." },
+          { id: "20.8", text: "Every gang has to initiate role-play for themselves." },
+        ]
+      },
+      {
+        id: "alliance",
+        title: "Alliance Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+        rules: [
+          { id: "21.1", text: "Alliance ban duration for violations: 72 hours.", ban: "72 hours" },
+          { id: "21.2", text: "Alliance is only valid in roleplay situations. No alliance is valid during code reds." },
+          { id: "21.3", text: "No gang is allowed to ask for/respond to any backup calls for code reds." },
+          { id: "21.4", text: "If alliance needs backup, they must type /TWEET in OOC and call them. Other gang must reply in OOC." },
+          { id: "21.5", text: "Alliance is allowed in zones after the code red ends (when asking PD to leave)." },
+        ]
+      },
+      {
+        id: "ooc",
+        title: "OOC Chat Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>',
+        rules: [
+          { id: "22.1", text: "/me is considered in RP. You can't type OOC stuff in /me unless you have permission." },
+          { id: "22.2", text: "Trash talking in OOC or using OOC for in character chat will lead to a ban." },
+          { id: "22.3", text: "Spamming OOC chat will lead to a kick from the server.", ban: "Kick" },
+          { id: "22.4", text: "Calling EMS in OOC chat is strictly prohibited. Use distress signal or phone." },
+          { id: "22.5", text: "Abusive language will not be tolerated.", ban: "6 hours" },
+          { id: "22.6", text: "Taunting anyone ingame/on discord would lead to Strict Action." },
+        ]
+      },
+      {
+        id: "erp",
+        title: "Erotic RP Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>',
+        rules: [
+          { id: "23.1", text: "ERP (Erotic Role Play) is strictly prohibited.", ban: "72 hours" },
+          { id: "23.2", text: "ERP is any role-playing activity performed mostly or exclusively for the purpose of sexual behavior." },
+        ]
+      },
+      {
+        id: "ems",
+        title: "EMS Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path><circle cx="20" cy="10" r="2"></circle></svg>',
+        rules: [
+          { id: "24.1", text: "EMS is not allowed to revive or carry anyone to the hospital in an on-going situation." },
+          { id: "24.2", text: "You cannot carry your died player and bring to hospital when EMS is in the city. Wait for EMS to respond." },
+          { id: "24.3", text: "EMS cannot enter during zone fights." },
+          { id: "24.4", text: "EMS is not allowed to respond at Cayo Perico." },
+        ]
+      },
+      {
+        id: "ticket",
+        title: "Ticket & Report Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>',
+        rules: [
+          { id: "25.1", text: "It's must to say 'Save POV' in valid format to make your ticket report valid." },
+          { id: "25.2", text: "For report-player ticket you need to provide a video proof (minimum 5 minutes)." },
+          { id: "25.3", text: "False reports may lead to punishment.", ban: "Warning" },
+          { id: "25.4", text: "Respect staff decisions. Arguing excessively may lead to punishment." },
+        ]
+      },
+      {
+        id: "recording",
+        title: "Recording Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"></path><rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect></svg>',
+        rules: [
+          { id: "26.1", text: "It is forbidden to use OBS without overlays. All overlays must be recorded." },
+          { id: "26.2", text: "Your PL, fps, and ping must be visible on your POV during code red situations.", ban: "6 hours" },
+          { id: "26.3", text: "While reporting a player, you must have video proof (minimum 5 minutes) of the situation." },
+          { id: "26.4", text: "Transaction of 1 Million without POV is not allowed.", ban: "Account Wipe" },
+        ]
+      },
+      {
+        id: "misc",
+        title: "Miscellaneous Rules",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>',
+        rules: [
+          { id: "27.1", text: "Respect all players and staff members at all times." },
+          { id: "27.2", text: "Use common sense in all situations." },
+          { id: "27.3", text: "Rules may be updated at any time. Check regularly for changes." },
+          { id: "27.4", text: "Ignorance of rules is not an excuse for breaking them." },
+          { id: "27.5", text: "Staff have final say in all disputes and rule interpretations." },
+        ]
+      }
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let searchTerm = '';
+    let expandedSections = new Set(ruleSections.map(s => s.id));
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      // Set date and counts
+      document.getElementById('updateDate').textContent = new Date().toLocaleDateString();
+      const totalRules = ruleSections.reduce((acc, s) => acc + s.rules.length, 0);
+      document.getElementById('ruleCount').textContent = totalRules;
+      document.getElementById('categoryCount').textContent = ruleSections.length;
+      
+      // Render
+      renderNavigation();
+      renderRules();
+      updateResultsInfo();
+      
+      // Search listener
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase();
+        document.getElementById('clearBtn').classList.toggle('visible', searchTerm.length > 0);
+        renderRules();
+        updateResultsInfo();
+      });
+      
+      // Filter listeners
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentFilter = pill.dataset.filter;
+          renderRules();
+          updateResultsInfo();
+        });
+      });
+      
+      // Scroll listener
+      window.addEventListener('scroll', () => {
+        document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
+      });
+    }
+
+    function renderNavigation() {
+      const grid = document.getElementById('navGrid');
+      grid.innerHTML = ruleSections.map(section => `
+        <a href="#${section.id}" class="nav-item">
+          ${section.icon}
+          <span>${section.title}</span>
+          <span class="nav-count">${section.rules.length}</span>
+        </a>
+      `).join('');
+    }
+
+    function getBanClass(ban) {
+      if (!ban) return '';
+      const lower = ban.toLowerCase();
+      if (lower.includes('permanent')) return 'permanent';
+      if (lower.includes('wipe')) return 'wipe';
+      if (lower.includes('72') || lower.includes('4 day') || lower.includes('96')) return 'severe';
+      if (lower.includes('48') || lower.includes('36')) return 'medium';
+      if (lower.includes('24') || lower.includes('32') || lower.includes('16') || lower.includes('12')) return 'light';
+      return 'minor';
+    }
+
+    function getBanSeverity(ban) {
+      if (!ban) return 'none';
+      const lower = ban.toLowerCase();
+      if (lower.includes('permanent') || lower.includes('wipe')) return 'permanent';
+      if (lower.includes('72') || lower.includes('4 day') || lower.includes('96')) return '72+';
+      if (lower.includes('24') || lower.includes('32') || lower.includes('36') || lower.includes('48')) return '24-48';
+      return 'under24';
+    }
+
+    function filterRules(section) {
+      return section.rules.filter(rule => {
+        // Search filter
+        const matchesSearch = !searchTerm || 
+          rule.text.toLowerCase().includes(searchTerm) ||
+          rule.id.toLowerCase().includes(searchTerm) ||
+          section.title.toLowerCase().includes(searchTerm);
+        
+        if (!matchesSearch) return false;
+        
+        // Punishment filter
+        if (currentFilter === 'all') return true;
+        if (currentFilter === 'none') return !rule.ban;
+        return getBanSeverity(rule.ban) === currentFilter;
+      });
+    }
+
+    function renderRules() {
+      const container = document.getElementById('rulesContainer');
+      
+      const filteredSections = ruleSections.map(section => ({
+        ...section,
+        filteredRules: filterRules(section)
+      })).filter(s => s.filteredRules.length > 0);
+      
+      container.innerHTML = filteredSections.map(section => `
+        <div class="section ${expandedSections.has(section.id) ? 'expanded' : ''}" id="${section.id}">
+          <div class="section-header" onclick="toggleSection('${section.id}')">
+            <div class="section-left">
+              <div class="section-icon">${section.icon}</div>
+              <div>
+                <div class="section-title">${section.title}</div>
+                <div class="section-count">${section.filteredRules.length} rules</div>
+              </div>
+            </div>
+            <div class="section-toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="rules-list">
+              ${section.filteredRules.map(rule => `
+                <div class="rule">
+                  <div class="rule-id">${rule.id}</div>
+                  <div class="rule-content">
+                    <div class="rule-text">${rule.text}</div>
+                    ${rule.ban ? `<div class="rule-ban ${getBanClass(rule.ban)}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                      ${rule.ban}
+                    </div>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateResultsInfo() {
+      const filteredSections = ruleSections.map(section => ({
+        ...section,
+        filteredRules: filterRules(section)
+      })).filter(s => s.filteredRules.length > 0);
+      
+      const totalFiltered = filteredSections.reduce((acc, s) => acc + s.filteredRules.length, 0);
+      const totalRules = ruleSections.reduce((acc, s) => acc + s.rules.length, 0);
+      
+      const info = document.getElementById('resultsInfo');
+      if (searchTerm || currentFilter !== 'all') {
+        info.innerHTML = `Showing <strong>${totalFiltered}</strong> of <strong>${totalRules}</strong> rules in <strong>${filteredSections.length}</strong> categories`;
+      } else {
+        info.innerHTML = '';
+      }
+    }
+
+    function toggleSection(id) {
+      if (expandedSections.has(id)) {
+        expandedSections.delete(id);
+      } else {
+        expandedSections.add(id);
+      }
+      document.getElementById(id).classList.toggle('expanded');
+    }
+
+    function expandAll() {
+      expandedSections = new Set(ruleSections.map(s => s.id));
+      document.querySelectorAll('.section').forEach(s => s.classList.add('expanded'));
+    }
+
+    function collapseAll() {
+      expandedSections.clear();
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('expanded'));
+    }
+
+    function toggleFilters() {
+      document.getElementById('filters').classList.toggle('visible');
+      document.getElementById('filterToggle').classList.toggle('active');
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchTerm = '';
+      document.getElementById('clearBtn').classList.remove('visible');
+      renderRules();
+      updateResultsInfo();
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function downloadTxt() {
+      let content = `
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                         ██████╗  █████╗ ██████╗  █████╗ ██████╗ ██╗███████╗  ║
+║                         ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║██╔════╝  ║
+║                         ██████╔╝███████║██████╔╝███████║██║  ██║██║███████╗  ║
+║                         ██╔═══╝ ██╔══██║██╔══██╗██╔══██║██║  ██║██║╚════██║  ║
+║                         ██║     ██║  ██║██║  ██║██║  ██║██████╔╝██║███████║  ║
+║                         ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝╚══════╝  ║
+║                                                                              ║
+║                              R E M A S T E R E D                             ║
+║                                                                              ║
+║                          OFFICIAL SERVER RULES                               ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+                           Last Updated: ${new Date().toLocaleDateString()}
+
+    By joining Paradise Remastered, you agree to follow all rules listed below.
+                  Ignorance of rules is not an excuse for breaking them.
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            TABLE OF CONTENTS                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+`;
+      ruleSections.forEach((section, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        content += `    ${num}. ${section.title.padEnd(40)} [${section.rules.length} rules]\n`;
+      });
+      
+      content += `\n${"═".repeat(80)}\n\n`;
+      
+      ruleSections.forEach((section, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        content += `\n╔${"═".repeat(78)}╗\n`;
+        content += `║  SECTION ${num}: ${section.title.toUpperCase().padEnd(62)}║\n`;
+        content += `╚${"═".repeat(78)}╝\n\n`;
+        
+        section.rules.forEach(rule => {
+          content += `    [${rule.id}] ${rule.text}\n`;
+          if (rule.ban) {
+            content += `           ⚠ Punishment: ${rule.ban}\n`;
+          }
+          content += `\n`;
+        });
+      });
+      
+      content += `
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          BAN DURATION REFERENCE                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║    ██ PERMANENT BAN    Severe violations (hacking, exploiting, harassment)   ║
+║    ██ 72+ HOURS        Major violations (RDM, power gaming, alliance)        ║
+║    ██ 48 HOURS         Serious violations (combat logging, fail RP)          ║
+║    ██ 24-32 HOURS      Standard violations (NLR, VDM, meta gaming)           ║
+║    ██ 6-16 HOURS       Minor violations (recording, name violations)         ║
+║    ██ KICK/WARNING     First-time minor offenses                             ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+                    ★ Thank you for being part of Paradise Remastered! ★
+                         Play fair. Respect others. Have fun.
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              paradiserp.com                                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Paradise-Remastered-Rules.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
