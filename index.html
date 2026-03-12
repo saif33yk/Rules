@@ -573,17 +573,7 @@
     .scroll-top:hover { transform: translateY(-2px); }
     .scroll-top.visible { display: flex; }
     .scroll-top svg { width: 20px; height: 20px; }
-    
-    /* Print Styles */
-    @media print {
-      body { background: #0a0a0a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .header, .controls, .quick-nav, .scroll-top, .header-buttons { display: none !important; }
-      .hero { padding: 40px 0; page-break-after: avoid; }
-      .section { page-break-inside: avoid; break-inside: avoid; }
-      .section.expanded .section-content { display: block !important; }
-      .rules-content { padding: 20px 0; }
-    }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
       .header-text { display: none; }
@@ -614,11 +604,6 @@
       <div class="header-buttons">
         <button class="btn btn-outline" onclick="window.print()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          Print
-        </button>
-        <button class="btn btn-primary" onclick="downloadTxt()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          Download
         </button>
       </div>
     </div>
@@ -1297,8 +1282,6 @@
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function downloadTxt() {
       let content = `
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
@@ -1373,7 +1356,6 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Paradise-Remastered-Rules.txt';
       a.click();
       URL.revokeObjectURL(url);
     }
