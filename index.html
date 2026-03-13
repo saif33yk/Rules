@@ -574,7 +574,16 @@
     .scroll-top.visible { display: flex; }
     .scroll-top svg { width: 20px; height: 20px; }
     
-  
+    /* Print Styles */
+    @media print {
+      body { background: #0a0a0a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .header, .controls, .quick-nav, .scroll-top, .header-buttons { display: none !important; }
+      .hero { padding: 40px 0; page-break-after: avoid; }
+      .section { page-break-inside: avoid; break-inside: avoid; }
+      .section.expanded .section-content { display: block !important; }
+      .rules-content { padding: 20px 0; }
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .header-text { display: none; }
@@ -602,7 +611,10 @@
           <p>Official Server Rules</p>
         </div>
       </div>
-
+      <div class="header-buttons">
+      </div>
+    </div>
+  </header>
   
   <!-- Hero -->
   <section class="hero">
@@ -707,7 +719,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>Paradise Remastered &copy; 2026. Play fair. Respect others. Have fun.</p>
+          <p>Paradise Remastered &copy; 2024. Play fair. Respect others. Have fun.</p>
         </div>
       </div>
     </div>
@@ -1352,7 +1364,8 @@
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url
+      a.href = url;
+      a.download = 'Paradise-Remastered-Rules.txt';
       a.click();
       URL.revokeObjectURL(url);
     }
